@@ -8,8 +8,10 @@
     "db:migrate:up": "knex migrate:latest --knexfile ./src/db/knexfile.js ",
     "db:migrate:down": "knex migrate:rollback --knexfile ./src/db/knexfile.js ",
     "db:migrate:make": "knex migrate:make --knexfile ./src/db/knexfile.js ",
+    "db:seed": "knex seed:run --knexfile ./src/db/knexfile.js",
     "start:dev": "nodemon --exec npm run babel-node -- ./src/server/server.js",
-    "webdev:start": "webpack-dev-server"
+    "webdev:start": "webpack-dev-server",
+    "test": "npm run babel-node index.js"
   },
   "author": "Ian Deans",
   "license": "MIT",
