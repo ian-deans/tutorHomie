@@ -4,3 +4,5 @@ scratch
 databases/*
 databases
 ./src/db/databases
+*/.next/*
+.env
