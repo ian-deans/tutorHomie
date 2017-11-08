@@ -1,8 +1,6 @@
-exports.seed = function(knex, Promise) {
-  // Deletes ALL existing entries
+exports.seed = function(knex) {
   return knex('class_codes').del()
     .then(function () {
-      // Inserts seed entries
       return knex('class_codes').insert([
         {code: 'TEST', value: 'test code'},
         {code: 'AZGIL20171016', value: 'Arizona - Gilbert - Oct 17 FSF'},
@@ -25,6 +23,6 @@ exports.seed = function(knex, Promise) {
         {code: 'UCSD20170807FSF-FT', value: 'UC San Diego - La Jolla - Aug 17 FSF FT'},
         {code: 'UDEN20170724FSF', value: 'Denver - Jul 17'},
         {code: 'UKED20170912FSF', value: 'Kansas - Sep 17 FSF'}
-      ]);
-    });
-};
+      ])
+    })
+}

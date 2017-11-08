@@ -9,6 +9,13 @@ module.exports = {
     }
   },
 
+  test: {
+    client: 'sqlite3',
+    connection: {
+      filename: path.resolve(__dirname + '/databases/test.tutor_homie.db')
+    }
+  },
+
   production: {
     client: 'sqlite3',
     connection: {
