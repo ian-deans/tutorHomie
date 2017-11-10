@@ -6,15 +6,17 @@
   "scripts": {
     "babel-node": "babel-node --presets=env",
     
-    "db:migrate:up": "knex migrate:latest --knexfile ./src/db/knexfile.js ",
-    "db:migrate:down": "knex migrate:rollback --knexfile ./src/db/knexfile.js ",
+    "db:migrate:up": "knex migrate:latest --knexfile ./src/db/knexfile.js && npm run test-db:migrate:up",
+    "db:migrate:down": "knex migrate:rollback --knexfile ./src/db/knexfile.js && npm run test-db:migrate:down",
     "db:migrate:make": "knex migrate:make --knexfile ./src/db/knexfile.js ",
     "db:seed": "knex seed:run --knexfile ./src/db/knexfile.js",
     
-    "test--db:migrate:up": "NODE_ENV=test knex migrate:latest --knexfile ./src/db/knexfile.js",
+    "test-db:migrate:up": "NODE_ENV=test knex migrate:latest --knexfile ./src/db/knexfile.js",
+    "test-db:migrate:down": "NODE_ENV=test knex migrate:rollback --knexfile ./src/db/knexfile.js",
     
     "start:dev": "nodemon --exec npm run babel-node -- ./src/server/server.js",
     "webdev:start": "webpack-dev-server",
+    
     "test": "NODE_ENV=test ava"
   },
   "author": "Ian Deans",
