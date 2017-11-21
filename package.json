@@ -5,35 +5,72 @@
   "main": "index.js",
   "scripts": {
     "babel-node": "babel-node --presets=env",
-    "db:migrate:up": "knex migrate:latest --knexfile ./src/db/knexfile.js ",
-    "db:migrate:down": "knex migrate:rollback --knexfile ./src/db/knexfile.js ",
+    "db:create": "sqlite3 ./src/db/databases/tutor_homie.db && npm run dev-db:create && npm run test-db:create",
+    "db:drop": "rm -rf ./src/db/databases/*",
+    "db:migrate:up": "knex migrate:latest --knexfile ./src/db/knexfile.js && npm run test-db:migrate:up",
+    "db:migrate:down": "knex migrate:rollback --knexfile ./src/db/knexfile.js && npm run test-db:migrate:down",
     "db:migrate:make": "knex migrate:make --knexfile ./src/db/knexfile.js ",
     "db:seed": "knex seed:run --knexfile ./src/db/knexfile.js",
+    "db:seed:make": "knex seed:make --knexfile ./src/db/knexfile.js",
+    "db:import:csv": "cd ./src/db/databases && sqlite3 dev.tutor_homie.db .mode csv ; sqlite3 dev.tutor_homie.db .import roster.csv students",
+    "dev-db:create": "sqlite3 ./src/db/databases/dev.tutor_homie.db",
+    "test-db:create": "sqlite3 ./src/db/databases/test.tutor_homie.db",
+    "test-db:migrate:up": "NODE_ENV=test knex migrate:latest --knexfile ./src/db/knexfile.js",
+    "test-db:migrate:down": "NODE_ENV=test knex migrate:rollback --knexfile ./src/db/knexfile.js",
     "start:dev": "nodemon --exec npm run babel-node -- ./src/server/server.js",
     "webdev:start": "webpack-dev-server",
-    "test": "npm run babel-node index.js"
+    "test": "NODE_ENV=test ava",
+    "cli": "babel-node ./cli/runCLI.js"
   },
   "author": "Ian Deans",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "columnify": "^1.5.4",
     "express": "^4.16.2",
+    "inquirer": "^3.3.0",
     "knex": "^0.13.0",
+    "moment": "^2.19.1",
     "morgan": "^1.9.0",
     "path": "^0.12.7",
     "sqlite3": "^3.1.13"
   },
   "devDependencies": {
+    "ava": "^0.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-helper-remap-async-to-generator": "^6.24.1",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.10.0",
+    "eslint-plugin-react": "^7.4.0",
     "html-webpack-plugin": "^2.30.1",
+    "knex-csv-seeder": "^0.4.1",
     "nodemon": "^1.12.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3"
+  },
+  "ava": {
+    "files": [
+      "**/tests/*.test.js",
+      "!**/not-this-file.js"
+    ],
+    "source": [
+      "**/*.{js,jsx}",
+      "!dist/**/*"
+    ],
+    "concurrency": 1,
+    "failFast": true,
+    "failWithoutAssertions": false,
+    "tap": true,
+    "powerAssert": false,
+    "require": [
+      "babel-register"
+    ]
   }
 }
