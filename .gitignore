@@ -2,3 +2,4 @@ node_modules
 src/db/databases
 scratch
 databases/*
+databases

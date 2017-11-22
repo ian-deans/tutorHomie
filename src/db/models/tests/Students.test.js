@@ -71,7 +71,6 @@ test.serial('Students.update()', async t => {
   t.true(student.name === 'Test2', "Student's name was not changed.")
 })
 
-
 test.serial('Students.activate()', async t => {
   t.truthy(Students.activate, '.activate() function does not exist.')
 
@@ -85,7 +84,6 @@ test.serial('Students.activate()', async t => {
   t.true(student.active === 1, 'Student was not activated.')
 })
 
-
 test.serial('Students.deactivate', async t => {
   t.truthy(Students.deactivate, '.deactivate() function does not exist.')
 
@@ -98,7 +96,6 @@ test.serial('Students.deactivate', async t => {
   t.truthy(student, 'Nothing returned from database.')
   t.false(student.active === 1, 'Student was not deactivated.')
 })
-
 
 test.serial('Students.delete()', async t => {
   t.truthy(Students.delete, '.delete() function does not exist.')
