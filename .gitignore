@@ -3,3 +3,4 @@ src/db/databases
 scratch
 databases/*
 databases
+./src/db/databases
