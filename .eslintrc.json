@@ -22,7 +22,7 @@
         ],
         "linebreak-style": [
             "error",
-            "unix"
+            "windows"
         ],
         "no-console": 0,
         "quotes": [
