@@ -1,14 +1,13 @@
 import ClassCodes from '../../db/models/ClassCodes'
 
 export default {
-  
   add: async (request, response) => {
     const _classcode = await ClassCodes.add(request.body)
     response
       .status(200)
       .json({
-        status: 'success', 
-        data: _classcode, 
+        status: 'success',
+        data: _classcode,
         message: 'Added new class code.'
       })
   },
@@ -36,9 +35,6 @@ export default {
   },
 
   update: async (request, response) => {
-    
+
   }
-
-
-
 }

@@ -1,8 +1,9 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('students', t => {
-    t.string('email').primary()
-    t.string('name')
+    t.increments('id').primary()
+    t.string('email').unique()
+    t.string('name').unique()
     t.string('class_code').references('code').inTable('class_codes')
     t.string('handle')
     t.date('grad_date')

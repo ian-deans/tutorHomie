@@ -1,14 +1,11 @@
 import express from 'express'
-import path from 'path'
-import Students from '../../db/models/Students'
+import studentController from '../controllers/studentController'
 
 const studentRouter = express.Router()
 
 studentRouter
-  .get('/', async (request, response) => {
-    const students = await Students.findAll()
-    response.json(students)
-  })
-  // .post()
+// .post()
+  .get('/', studentController.findAll)
+  .get('/one', studentController.findOne)
 
 export default studentRouter
