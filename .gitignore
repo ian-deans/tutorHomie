@@ -1,8 +1,7 @@
 node_modules
-src/db/databases
 scratch
-databases/*
-databases
-./src/db/databases
-*/.next/*
+src/db/databases/*.db
 .env
+nextjs/.next
+package-lock.json
+yarn.lock
