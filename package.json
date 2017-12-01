@@ -18,7 +18,6 @@
     "test-db:migrate:up": "NODE_ENV=test knex migrate:latest --knexfile ./src/db/knexfile.js",
     "test-db:migrate:down": "NODE_ENV=test knex migrate:rollback --knexfile ./src/db/knexfile.js",
     "start:dev": "nodemon --exec npm run babel-node -- ./src/server/server.js",
-    "webdev:start": "webpack-dev-server",
     "test": "NODE_ENV=test ava",
     "cli": "babel-node ./cli/runCLI.js"
   },
@@ -27,6 +26,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "columnify": "^1.5.4",
+    "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "inquirer": "^3.3.0",
     "knex": "^0.13.0",

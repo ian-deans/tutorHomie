@@ -1,0 +1,100 @@
+Arguments: 
+  /home/ideans/.nvm/versions/node/v8.9.1/bin/node /mnt/c/Users/idean/scoop/apps/yarn/1.3.2/Yarn/bin/yarn.js add sqlite3
+
+PATH: 
+  /home/ideans/bin:/home/ideans/.local/bin:/home/ideans/.nvm/versions/node/v8.9.1/bin:./node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files/ConEmu:/mnt/c/Program Files/ConEmu/ConEmu:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Users/idean/scoop/persist/nvm/nodejs/v8.9.1:/mnt/c/Users/idean/scoop/apps/yarn/1.3.2/Yarn/bin:/mnt/c/Users/idean/scoop/persist/yarn/bin:/mnt/c/Users/idean/scoop/apps/openjdk/1.8.0.151-1/bin:/mnt/c/Users/idean/scoop/apps/postgresql/10.0/bin:/mnt/c/Users/idean/scoop/apps/python/3.6.3/Scripts:/mnt/c/Users/idean/AppData/Local/Programs/Python/Launcher:/mnt/c/Users/idean/scoop/persist/ruby/gems/bin:/mnt/c/Users/idean/scoop/apps/ruby/2.4.2-2/bin:/mnt/c/Users/idean/scoop/shims:/mnt/c/Users/idean/AppData/Local/Microsoft/WindowsApps:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Users/idean/AppData/Local/atom/bin:/snap/bin
+
+Yarn version: 
+  1.3.2
+
+Node version: 
+  8.9.1
+
+Platform: 
+  linux x64
+
+npm manifest: 
+  {
+    "name": "tutorhomie",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "babel-node": "babel-node --presets=env",
+      "db:create": "sqlite3 ./src/db/databases/tutor_homie.db && npm run dev-db:create && npm run test-db:create",
+      "db:drop": "rm -rf ./src/db/databases/*",
+      "db:migrate:up": "knex migrate:latest --knexfile ./src/db/knexfile.js && npm run test-db:migrate:up",
+      "db:migrate:down": "knex migrate:rollback --knexfile ./src/db/knexfile.js && npm run test-db:migrate:down",
+      "db:migrate:make": "knex migrate:make --knexfile ./src/db/knexfile.js ",
+      "db:seed": "knex seed:run --knexfile ./src/db/knexfile.js",
+      "db:seed:make": "knex seed:make --knexfile ./src/db/knexfile.js",
+      "db:import:csv": "cd ./src/db/databases && sqlite3 dev.tutor_homie.db .mode csv ; sqlite3 dev.tutor_homie.db .import roster.csv students",
+      "dev-db:create": "sqlite3 ./src/db/databases/dev.tutor_homie.db",
+      "test-db:create": "sqlite3 ./src/db/databases/test.tutor_homie.db",
+      "test-db:migrate:up": "NODE_ENV=test knex migrate:latest --knexfile ./src/db/knexfile.js",
+      "test-db:migrate:down": "NODE_ENV=test knex migrate:rollback --knexfile ./src/db/knexfile.js",
+      "start:dev": "nodemon --exec npm run babel-node -- ./src/server/server.js",
+      "test": "NODE_ENV=test ava",
+      "cli": "babel-node ./cli/runCLI.js"
+    },
+    "author": "Ian Deans",
+    "license": "MIT",
+    "dependencies": {
+      "body-parser": "^1.18.2",
+      "columnify": "^1.5.4",
+      "express": "^4.16.2",
+      "inquirer": "^3.3.0",
+      "knex": "^0.13.0",
+      "moment": "^2.19.1",
+      "morgan": "^1.9.0",
+      "path": "^0.12.7",
+      "sqlite3": "^3.1.13"
+    },
+    "devDependencies": {
+      "ava": "^0.23.0",
+      "babel-cli": "^6.26.0",
+      "babel-core": "^6.26.0",
+      "babel-helper-remap-async-to-generator": "^6.24.1",
+      "babel-loader": "^7.1.2",
+      "babel-plugin-transform-object-rest-spread": "^6.26.0",
+      "babel-preset-env": "^1.6.1",
+      "babel-preset-react": "^6.24.1",
+      "babel-register": "^6.26.0",
+      "eslint": "^4.10.0",
+      "eslint-plugin-react": "^7.4.0",
+      "html-webpack-plugin": "^2.30.1",
+      "knex-csv-seeder": "^0.4.1",
+      "nodemon": "^1.12.1",
+      "react": "^16.0.0",
+      "react-dom": "^16.0.0",
+      "webpack": "^3.8.1",
+      "webpack-dev-server": "^2.9.3"
+    },
+    "ava": {
+      "files": [
+        "**/tests/*.test.js",
+        "!**/not-this-file.js"
+      ],
+      "source": [
+        "**/*.{js,jsx}",
+        "!dist/**/*"
+      ],
+      "concurrency": 1,
+      "failFast": true,
+      "failWithoutAssertions": false,
+      "tap": true,
+      "powerAssert": false,
+      "require": [
+        "babel-register"
+      ]
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: EINVAL: invalid argument, lstat '/mnt/c/data/developer/projects/tutorHomie/node_modules/@ava/babel-preset-transform-test-files/license'
