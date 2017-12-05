@@ -1,14 +1,40 @@
 import db from '../db'
 
 const Students = {
+  add: student =>
+    db('students')
+      .insert(student)
+      .returning('*'),
 
-  add: student => db('students').insert(student).returning('*'),
-  findAll: () => db.select().from('students'),
-  findOne: query => db('students').where({[query.key]: query.value}),
-  update: (email, newVals) => db('students').where({email}).update({...newVals}),
-  delete: email => db('students').where({email:email}).del(),
-  activate: email => db('students').where({email:email}).update({active: true}),
-  deactivate: email => db('students').where({email: email}).update({active: false}),
+  findAll: () =>
+    db('students'),
+
+  findOne: id =>
+    db('students')
+      .where({id:id}),
+
+  update: (id, newValues) =>
+    db('students')
+      .where({id})
+      .update({...newValues})
+      .returning('*'),
+
+  delete: id =>
+    db('students')
+      .where({id:id})
+      .del(),
+
+  activate: id =>
+    db('students')
+      .where({id:id})
+      .update({active: true})
+      .returning('*'),
+
+  deactivate: id =>
+    db('students')
+      .where({id: id})
+      .update({active: false})
+      .returning('*'),
 }
 
 export default Students

@@ -8,6 +8,8 @@ classCodeRouter
   .get('/', classCodeController.getAll)
   .get('/:code', classCodeController.getByCode)
   // .put()
-  // .delete()
+  .delete('/', classCodeController.delete)
+  .delete('/clean', classCodeController.clearNulls)
 
 export default classCodeRouter
+

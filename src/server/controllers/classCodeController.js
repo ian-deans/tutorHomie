@@ -1,40 +1,32 @@
 import ClassCodes from '../../db/models/ClassCodes'
+import {_api, _respond} from './utils'
 
 export default {
   add: async (request, response) => {
-    const _classcode = await ClassCodes.add(request.body)
-    response
-      .status(200)
-      .json({
-        status: 'success',
-        data: _classcode,
-        message: 'Added new class code.'
-      })
+    _respond(response, await _api(() => 
+      ClassCodes.add(request.body)))
   },
 
   getAll: async (request, response) => {
-    const _classcodes = await ClassCodes.findAll()
-    response
-      .status(200)
-      .json({
-        status: 'success',
-        data: _classcodes,
-        message: 'Retrieved all class codes.'
-      })
+    _respond(response, await _api(ClassCodes.findAll))
   },
 
   getByCode: async (request, response) => {
-    const _classcode = await ClassCodes.findByCode(request.params.code)
-    response
-      .status(200)
-      .json({
-        status: 'succes',
-        data: _classcode,
-        message: `Retrieved class code ${request.params.code}.`
-      })
+    _respond(response, _api(() => 
+      ClassCodes.findByCode(request.params.id)))
   },
 
   update: async (request, response) => {
+    const {code, newValues} = request.body
+    _respond(response, await _api(() =>
+      ClassCodes.update(code, newValues)))
+  },
 
-  }
+  delete: async (request, response) => {
+    _respond(response, await _api(() => 
+      ClassCodes.delete(request.body.code)))
+  },
+
+  clearNulls: async (request, response) =>
+    _respond(response, await _api(ClassCodes.clearNulls))
 }

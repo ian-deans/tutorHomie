@@ -6,7 +6,7 @@
   "scripts": {
     "babel-node": "babel-node --presets=env",
     "db:create": "sqlite3 ./src/db/databases/tutor_homie.db && npm run dev-db:create && npm run test-db:create",
-    "db:drop": "rm -rf ./src/db/databases/*",
+    "db:drop": "del src/db/databases/*.db",
     "db:migrate:up": "knex migrate:latest --knexfile ./src/db/knexfile.js && npm run test-db:migrate:up",
     "db:migrate:down": "knex migrate:rollback --knexfile ./src/db/knexfile.js && npm run test-db:migrate:down",
     "db:migrate:make": "knex migrate:make --knexfile ./src/db/knexfile.js ",

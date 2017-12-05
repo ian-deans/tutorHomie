@@ -5,3 +5,4 @@ src/db/databases/*.db
 nextjs/.next
 package-lock.json
 yarn.lock
+yarn-error.log
