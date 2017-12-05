@@ -1,14 +1,15 @@
 import express from 'express'
-import path from 'path'
-import ClassCodes from '../../db/models/ClassCodes'
+import classCodeController from '../controllers/classCodeController'
 
 const classCodeRouter = express.Router()
 
 classCodeRouter
-  .get('/', async (request, response) => {
-    const classcodes = await ClassCodes.findAll()
-    response.json(classcodes)
-  })
-  // .post()
+  .post('/', classCodeController.add)
+  .get('/', classCodeController.getAll)
+  .get('/:code', classCodeController.getByCode)
+  // .put()
+  .delete('/', classCodeController.delete)
+  .delete('/clean', classCodeController.clearNulls)
 
 export default classCodeRouter
+
