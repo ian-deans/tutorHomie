@@ -1,4 +1,5 @@
 import React from 'react'
+import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap'
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -25,16 +26,17 @@ export default class Form extends React.Component {
   }
 
   render() {
-    
     return (
-      <form>
-        { this.state && (Object.keys(this.state).map((fieldName, i) => 
-          <div key={i}>
-            <label>{fieldName}</label>
-            <input value={this.state[fieldName]} onChange={event => this.handleOnChange(event, fieldName)}  />
-          </div>
-        )) }
-        <button onClick={this.handleSubmit}>Add</button>
+      <form style={{display: 'flex'}}>
+        <FormGroup>
+          { this.state && (Object.keys(this.state).map((fieldName, i) => 
+            <div key={i}>
+              <ControlLabel>{fieldName}</ControlLabel>
+              <FormControl type="text" value={this.state[fieldName]} onChange={event => this.handleOnChange(event, fieldName)}  />
+            </div>
+          )) }
+          <button onClick={this.handleSubmit}>Add</button>
+        </FormGroup>
       </form>
     )
   }

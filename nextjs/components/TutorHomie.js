@@ -2,6 +2,7 @@ import React from 'react'
 import Table from './Table'
 import Form from './Form'
 import {Button, ButtonGroup, Alert} from 'react-bootstrap'
+import {buildTableData, apiFetch} from '../utils'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -15,53 +16,41 @@ export default class App extends React.Component {
       students: null,
       class_codes: null,
       sessions: null,
-
       showAlert: false,
       alertData: null,
+      fields: {
+        students: ['name', 'email', 'class_code', 'handle'],
+        class_codes: ['code', 'value']
+      },
+      isLoading: true
     }
     this.handlePopUp = this.handlePopUp.bind(this)
   }
 
   async componentDidMount() {
+    await this.setState({loading: true})
     const students = await this.getStudents()
     const class_codes = await this.getClassCodes()
-    this.setState({students, class_codes})
+    this.setState({students, class_codes, isLoading: false})
   }
-
   async getStudents() {
-     const res = await fetch(`http://${document.domain}:4040/students`)
-     const result = await res.json()
-     if (result.message) {
-       throw new Error(result.message)
-     }
-     return result.data
+    return await apiFetch('students')
   }
-
   async getClassCodes() {
-     const res = await fetch(`http://${document.domain}:4040/classcodes`)
-     const result = await res.json()
-    //  if (result.message) {
-    //    throw new Error(result.message)
-    //  }
-     return result.data
+     return await apiFetch('classcodes')
   }
 
   selectTable(table) {
-    let tableData = {}
+    let tableData
     switch(table) {
       case 'students':
-        tableData.subject = 'students'
-        tableData.data = this.state.students
-        tableData.sorkKey = 'name'
+        tableData = buildTableData(table, this.state.students, 'name')
         break
-
       case 'class_codes':
-        tableData.subject = 'class_codes'
-        tableData.data = this.state.class_codes
-        tableData.sortKey = 'code'
+        tableData = buildTableData(table, this.state.class_codes, 'code')
         break
     }
-    this.setState({tableData})
+    this.setState({tableData, showAlert: false})
   }
 
   handlePopUp(data) {
@@ -69,41 +58,57 @@ export default class App extends React.Component {
   }
 
   _Alert() {
-    const data = this.state.alertData
-    const name = data[2].split(' ')
-    return (<Alert>{`${name[1]}, ${name[0]}~${data[3]}~${data[1]}~${data[4]}`}</Alert>)
+    if (this.state.tableData.subject === 'students') {
+      const data = this.state.alertData
+      const name = data[2].split(' ')
+      return (<Alert>{`${name[1]}, ${name[0]}~${data[3]}~${data[1]}~${data[4]}`}</Alert>)
+    } 
+  }
+
+  _Form() {
+    const {subject} = this.state.tableData
+    switch(subject) {
+      case 'students':
+        return <Form email='' name='' class_code='' handle='' grad_date='' />
+    }
+  }
+
+  _Button(target) {
+    const {isLoading} = this.state
+    return <Button 
+        disabled={isLoading} 
+        bsStyle="info" 
+        onClick={() => this.selectTable(target)}
+      >
+        {isLoading ? 'Loading...' : target}
+      </Button>
   }
 
   render() {
-
     const {tableData} = this.state
+    const buttons = (<ButtonGroup>
+      {this._Button('students')}
+      {this._Button('class_codes')}
+    </ButtonGroup>)
 
     return (
       <div style={{margin: "10px"}}>
-        <div style={{display: "flex", justifyContent: "center"}}>
+        <div style={{display: "flex", justifyContent: "center", margin: "10px"}}>
           <div>
             <h1>Tutor Homie</h1>
-            <ButtonGroup>
-              <Button bsStyle="info" onClick={() => this.selectTable('students')}>Students</Button>
-              <Button bsStyle="info" onClick={() => this.selectTable('class_codes')}>Class Codes</Button>
-            </ButtonGroup>
+           {buttons}
           </div>
-        
         </div>
         {this.state.showAlert && (this._Alert())}
-        <Table 
-          data={tableData.data}
-          subject={tableData.subject}
-          sortKey={tableData.sortKey}
-          popUpFn={this.handlePopUp}
-        />
-
-        <Form 
-          email=''
-          name=''
-          class_code=''
-        />
-        
+        {this.state.tableData.data && ( 
+          <Table 
+            data={tableData.data}
+            subject={tableData.subject}
+            sortKey={tableData.sortKey}
+            popUpFn={this.handlePopUp}
+          />)
+        }
+        {this.state.tableData.subject && (this._Form())}
       </div>
     )
   }
