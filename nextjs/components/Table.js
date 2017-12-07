@@ -1,37 +1,36 @@
 import React from 'react'
+import {Table, Panel} from 'react-bootstrap'
+import Row from './Row'
 
 export default props => {
   let data, columns, rows
-    
-  if (props.tableData.data) {
+  if (props.data) {
 
-    data = props.tableData.data.map(rowItem =>
+    data = props.data.map(rowItem =>
       Object.values(rowItem)
     )
 
-    columns = <tr>
-      { [...Object.keys(props.tableData.data[0])]
-        .map((columnName, i) => <td key={i}>{columnName}</td>)}
-    </tr>
+    columns = (<tr>
+      { [...Object.keys(props.data[0])]
+        .map((columnName, i) => <th key={i}>{columnName}</th>)}
+    </tr>)
 
     rows = data.map((row, i) =>
-      <tr key={i}>
-        {row.map((rowData, k) =>
-          <td key={k}>
-            {rowData}
-          </td>
-        )}
-      </tr>
+      <Row key={i} data={row} popUpFn={props.popUpFn}/>
     )
   }
 
-  return (
-    <table>
-      <tbody>
-        {columns && (columns)}
+  const title = (<h3>{props.subject}</h3>)
 
-        {rows && (rows)}
-      </tbody>
-    </table>
+  return (
+    <Panel header={title} bsStyle="primary" style={{marginLeft: "10px", marginRight: "10px", marginTop: "15px"}}>
+      <Table striped bordered condensed fill>
+        <tbody>
+          {columns && (columns)}
+
+          {rows && (rows)}
+        </tbody>
+      </Table>
+    </Panel>
   )
 }

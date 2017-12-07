@@ -3,7 +3,6 @@ import {_api, _respond} from './utils'
 
 export default {
   add: async (request, response) => {
-    console.log(request.body)
     _respond(response, await _api(() =>
       Students.add(request.body)))
   },
