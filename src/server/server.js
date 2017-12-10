@@ -7,6 +7,7 @@ import path from 'path'
 
 import studentRouter from './routes/studentRouter'
 import classCodeRouter from './routes/classCodeRouter'
+import sessionRouter from './routes/sessionRouter'
 
 const server = express()
 const port = process.env.PORT || 4040
@@ -24,6 +25,7 @@ server.use(express.static(path.join(__dirname, '/public')))
 
 server.use('/students', studentRouter)
 server.use('/classcodes', classCodeRouter)
+server.use('/sessions', sessionRouter)
 
 
 server.use((request, response, next) => {
@@ -41,5 +43,5 @@ server.use((request, response) => {
 })
 
 server.listen(port, () => {
-  console.log(`Starting webserver on port ${port}...`)
+  console.log(`-> Webserver started on port ${port}.`)
 })

@@ -1,8 +1,8 @@
 exports.up = function(knex) {
   return knex.schema.createTable('sessions', t => {
     t.increments('id').primary()
-    t.dateTime('datetime')
-    t.string('student').references('name').inTable('students')
+    t.dateTime('datetime').notNullable()
+    t.string('student').references('name').inTable('students').notNullable()
     t.string('topic')
     t.string('status').references('id').inTable('session_status')
     t.boolean('in_central')

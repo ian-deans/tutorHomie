@@ -12,7 +12,7 @@ export default {
   },
 
   getByCode: async (request, response) => {
-    _respond(response, _api(() => 
+    _respond(response, await _api(() => 
       ClassCodes.findByCode(request.params.id)))
   },
 

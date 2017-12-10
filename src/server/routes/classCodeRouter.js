@@ -1,15 +1,11 @@
 import express from 'express'
-import classCodeController from '../controllers/classCodeController'
+import controller from '../controllers/classCodeController'
 
-const classCodeRouter = express.Router()
-
-classCodeRouter
-  .post('/', classCodeController.add)
-  .get('/', classCodeController.getAll)
-  .get('/:code', classCodeController.getByCode)
-  // .put()
-  .delete('/', classCodeController.delete)
-  .delete('/clean', classCodeController.clearNulls)
-
-export default classCodeRouter
+export default express.Router()
+  .post('/', controller.add)
+  .get('/', controller.getAll)
+  .get('/:code', controller.getByCode)
+  .put('/', controller.update)
+  .delete('/', controller.delete)
+  .delete('/clean', controller.clearNulls) //TODO: remove this route 
 
