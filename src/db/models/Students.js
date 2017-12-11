@@ -1,6 +1,6 @@
 import db from '../db'
 
-const Students = {
+export default {
   add: student =>
     db('students')
       .insert(student)
@@ -36,5 +36,3 @@ const Students = {
       .update({active: false})
       .returning('*'),
 }
-
-export default Students

@@ -1,18 +1,16 @@
 import db from '../db'
 
-const ClassCodes = {
+export default {
   add: classCode => 
     db('class_codes')
       .insert(classCode)
       .returning('*'),
 
   findAll: () => 
-    db('class_codes')
-      .select('*'),
+    db('class_codes'),
 
   findByCode: code => 
     db('class_codes')
-      .select('*')
       .where({code: code}),
 
   update: (code, newValues) => 
@@ -31,5 +29,3 @@ const ClassCodes = {
       .whereNull('code')
       .del()
 }
-
-export default ClassCodes
