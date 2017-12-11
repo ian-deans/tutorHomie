@@ -4,7 +4,7 @@ exports.up = function(knex) {
     t.dateTime('datetime').notNullable()
     t.string('student').references('name').inTable('students').notNullable()
     t.string('topic')
-    t.string('status').references('id').inTable('session_status')
+    t.integer('status').references('id').inTable('session_status')
     t.boolean('in_central')
   })
 }

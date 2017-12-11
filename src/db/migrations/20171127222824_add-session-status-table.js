@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
   return knex.schema.createTable('session_status', t => {
-    t.integer('id').primary()
+    t.integer('id').unsigned().primary()
     t.string('text')
   })
 }
