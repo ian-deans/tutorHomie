@@ -4,24 +4,32 @@ require('babel-register')
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    client: 'pg',
+    version: '7.4',
     connection: {
-      filename: path.resolve(__dirname + '/databases/dev.tutor_homie.db') 
+      host: '127.0.0.1',
+      user: 'idean',
+      database: 'dev.tutor_homie'
     }
   },
 
   test: {
-    client: 'sqlite3',
+    client: 'pg',
+    version: '7.4',
     connection: {
-      filename: path.resolve(__dirname + '/databases/test.tutor_homie.db')
+      host: '127.0.0.1',
+      user: 'idean',
+      database: 'test.tutor_homie'
     }
   },
 
   production: {
-    client: 'sqlite3',
+    client: 'pg',
+    version: '7.4',
     connection: {
-      filename: path.resolve(__dirname + '/databases/tutor_homie.db') 
+      host: '127.0.0.1',
+      user: 'idean',
+      database: 'tutor_homie'
     }
   }
-
-};
+}
