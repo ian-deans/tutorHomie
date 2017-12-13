@@ -2,7 +2,7 @@ import Sessions from '../../db/models/Sessions'
 import {_api, _respond} from './utils'
 
 export default {
-  add: async (request, response) =>{
+  add: async (request, response) => {
     _respond(response, await _api(() =>
     Sessions.add(request.body)))
   },
@@ -16,9 +16,9 @@ export default {
       Sessions.findOne(request.params.id))),
 
   update: async (request, response) => {
-    const {id, newValues} = request.body
+    const {id} = request.params
     return _respond(response, await _api(() =>
-      Sessions.update(id, newValues)))
+      Sessions.update(id, request.body)))
     },
 
     delete: async (request, response) =>
