@@ -1,10 +1,11 @@
 import db from '../db'
 
 export default {
-  add: sessionData =>
-    db('sessions')
+  add: sessionData => {
+    console.log(sessionData)
+    return db('sessions')
       .insert(sessionData)
-      .returning('*'),
+      .returning('*')},
 
   findAll: () =>
     db('sessions'),
