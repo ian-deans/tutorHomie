@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "api:dev": "nodemon --exec npm run babel-node -- ./src/server/server.js",
+    "start:api": "nodemon --exec npm run babel-node -- ./src/server/server.js",
     "babel-node": "babel-node --presets=env",
     "db:reset": "npm run db:drop && npm run db:create && npm run db:migrate:up && npm run db:seed",
     "db:create": "createdb dev.tutor_homie && createdb test.tutor_homie && createdb tutor_homie",
@@ -34,7 +34,8 @@
     "path": "^0.12.7",
     "pg": "^7.4.0",
     "react-bootstrap": "^0.31.5",
-    "sqlite3": "^3.1.13"
+    "react-fontawesome": "^1.6.1",
+    "react-toolbox": "^2.0.0-beta.12"
   },
   "devDependencies": {
     "ava": "^0.23.0",

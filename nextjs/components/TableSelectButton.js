@@ -5,9 +5,9 @@ export default props => {
   return <Button 
     disabled={props.isLoading} 
     bsStyle="info" 
-    onClick={() => props.selectTable(props.target)}
+    onClick={() => props.selectSubject(props.subject)}
   >
-    {props.isLoading ? 'Loading...' : props.target}
+    {props.isLoading ? 'Loading...' : props.subject}
   </Button>
 
 }

@@ -7,7 +7,9 @@ export default {
       .returning('*'),
 
   findAll: () =>
-    db('students'),
+    db('students')
+      .where({active: true})
+      .orderBy('name', 'asc'),
 
   findOne: id =>
     db('students')

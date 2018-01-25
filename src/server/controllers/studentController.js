@@ -17,9 +17,9 @@ export default {
   },
 
   update: async (request, response) => {
-    const {id, newValues} = request.body
+    const newValues = request.body
     _respond(response, await _api(() =>
-      Students.update(id, newValues)))
+      Students.update(request.params.id, request.body)))
   },
 
   delete: async (request, response) => {

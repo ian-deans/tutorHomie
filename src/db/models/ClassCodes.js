@@ -7,7 +7,8 @@ export default {
       .returning('*'),
 
   findAll: () => 
-    db('class_codes'),
+    db('class_codes')
+      .orderBy('code', 'asc'),
 
   findByCode: code => 
     db('class_codes')

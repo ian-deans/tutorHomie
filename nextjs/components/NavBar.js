@@ -11,21 +11,28 @@ export default props => {
         <ButtonGroup>
           <TableSelectButton 
             isLoading={props.isLoading}
-            selectTable={props.selectTable}
-            target="students"
+            selectSubject={props.selectSubjectFn}
+            subject="students"
           />
           <TableSelectButton 
             isLoading={props.isLoading}
-            selectTable={props.selectTable}
-            target="class_codes"
+            selectSubject={props.selectSubjectFn}
+            subject="classcodes"
           />
           <TableSelectButton 
             isLoading={props.isLoading}
-            selectTable={props.selectTable}
-            target="sessions"
+            selectSubject={props.selectSubjectFn}
+            subject="sessions"
           />
         </ButtonGroup>
       }
+
+      <Button
+        bsStyle='success'
+        onClick={props.toggleAddFormFn}
+      >
+      +
+      </Button>
     </Panel>
   )
 
