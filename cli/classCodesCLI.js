@@ -32,10 +32,8 @@ export default async function classCodesCLI(action) {
 
     case actions.UPDATE:
     //TODO: Add update feature
-    console.log('option: ', option)
     try {
       const newVals = JSON.parse(process.argv[5])
-      console.log('newVals: ', newVals)
       await ClassCodes.update(option, newVals)
       } catch (error) {
         throw error

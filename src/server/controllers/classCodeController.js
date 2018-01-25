@@ -17,14 +17,15 @@ export default {
   },
 
   update: async (request, response) => {
-    const {code, newValues} = request.body
+    const code = request.params.code
+    const {newValues} = request.body
     _respond(response, await _api(() =>
       ClassCodes.update(code, newValues)))
   },
 
   delete: async (request, response) => {
     _respond(response, await _api(() => 
-      ClassCodes.delete(request.body.code)))
+      ClassCodes.delete(request.params.code)))
   },
 
   clearNulls: async (request, response) =>

@@ -11,7 +11,11 @@ export const _api = async apiFn => {
   return result
 }
 
-export const _respond = (response, result) => 
+export const _respond = (response, result) => {
+  if (result.message) {
+    throw new Error(result.message || 'Internal Error')
+  }
   response
     .status(result.status)
     .json(result)
+}

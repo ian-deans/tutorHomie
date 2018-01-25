@@ -5,7 +5,7 @@ export default express.Router()
   .post('/', controller.add)
   .get('/', controller.getAll)
   .get('/:code', controller.getByCode)
-  .put('/', controller.update)
-  .delete('/', controller.delete)
+  .put('/:code', controller.update)
+  .delete('/:code', controller.delete)
   .delete('/clean', controller.clearNulls) //TODO: remove this route 
 

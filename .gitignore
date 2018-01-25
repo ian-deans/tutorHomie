@@ -8,3 +8,5 @@ yarn.lock
 yarn-error.log
 src/db/seeds
 src/server/public/app_bundle.js
+.idea
+*.log
