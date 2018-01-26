@@ -1,10 +1,11 @@
 import React from 'react'
 import {Table, Panel} from 'react-bootstrap'
-import Row from './Row'
+import Row from '../Row'
+import TableWrapper from './TableWrapper'
 
 export default props => {
   let _columns, _rows
-  let _title = 'Tutor Homie'
+  let title = 'Tutor Homie'
 
   if (props.subject) {
     _columns = props.fields.map((field, i) => 
@@ -14,18 +15,11 @@ export default props => {
       <Row key={i} data={value} popUpFn={props.popUpFn} />
     )
 
-    _title = props.subject
+    title = props.subject
   }
 
   return (
-    <Panel header={_title} 
-      bsStyle="primary" 
-      style={{
-        marginLeft: "10px", 
-        marginRight: "10px", 
-        marginTop: "15px",
-      }}
-    >
+    <TableWrapper title={title}>
       <Table striped bordered responsive condensed fill>
         <thead>
           <tr>
@@ -36,6 +30,6 @@ export default props => {
           {props.subject && (_rows)}
         </tbody>
       </Table>
-    </Panel>
+    </TableWrapper>
   )
 }
