@@ -11,7 +11,7 @@ import sessionRouter from './routes/sessionRouter'
 import sessionStatusRouter from './routes/sessionStatusRouter'
 
 const server = express()
-const port = process.env.PORT || 4040
+const port = process.env.PORT || 4000
 
 
 server.set('port', port)

@@ -47,7 +47,7 @@ const _fetchHeaders = () =>
   new Headers({'Content-Type': 'application/json'})
 
 const _fetchURL = (type, id) => {
-  let url = `http://${document.domain}:4040/${type}`
+  let url = `http://${document.domain}:4000/${type}`
   if (id) {
     url += `/${id}`
   }

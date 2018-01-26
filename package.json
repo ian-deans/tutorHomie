@@ -10,8 +10,8 @@
     "dev": "nodemon --exec npm run babel-node -- ./src/server/server.js",
     "db:create": "createdb test.tutor_homie && createdb tutor_homie",
     "db:drop": "dropdb test.tutor_homie && dropdb tutor_homie",
-    "dev-db:create":"createdb dev.tutor_homie",
-    "dev-db:drop":"dropdb dev.tutor_homie",
+    "dev-db:create": "createdb dev.tutor_homie",
+    "dev-db:drop": "dropdb dev.tutor_homie",
     "db:reset": "npm run db:drop && npm run db:create && npm run db:migrate:up && npm run db:seed",
     "db:migrate:up": "knex migrate:latest --knexfile ./src/db/knexfile.js && npm run test-db:migrate:up",
     "db:migrate:down": "knex migrate:rollback --knexfile ./src/db/knexfile.js && npm run test-db:migrate:down",
@@ -19,7 +19,8 @@
     "test-db:migrate:down": "NODE_ENV=test knex migrate:rollback --knexfile ./src/db/knexfile.js",
     "db:migrate:make": "knex migrate:make --knexfile ./src/db/knexfile.js",
     "db:seed": "knex seed:run --knexfile ./src/db/knexfile.js",
-    "db:seed:make": "knex seed:make --knexfile ./src/db/knexfile.js"
+    "db:seed:make": "knex seed:make --knexfile ./src/db/knexfile.js",
+    "webpack": "webpack"
   },
   "author": "Ian Deans",
   "license": "MIT",

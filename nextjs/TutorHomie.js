@@ -164,7 +164,7 @@ export default class TutorHomie extends React.Component {
           viewComponent={modalBody}
         />
 
-        <components.DisplayTable 
+        <components.Table 
             fields={table.fields}
             values={table.values}
             subject={focused.subject}
