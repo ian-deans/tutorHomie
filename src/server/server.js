@@ -9,10 +9,10 @@ import studentRouter from './routes/studentRouter'
 import classCodeRouter from './routes/classCodeRouter'
 import sessionRouter from './routes/sessionRouter'
 import sessionStatusRouter from './routes/sessionStatusRouter'
+import htmlRouter from './routes/htmlRouter'
 
 const server = express()
 const port = process.env.PORT || 4040
-
 
 server.set('port', port)
 
@@ -22,13 +22,12 @@ server.use(bodyParser.json())
 
 server.use(express.static(path.join(__dirname, '/public')))
 
-
-
 server.use('/students', studentRouter)
 server.use('/classcodes', classCodeRouter)
 server.use('/sessions', sessionRouter)
 server.use('/sessionstatus', sessionStatusRouter)
 
+server.use('/', htmlRouter)
 
 server.use((request, response, next) => {
   let error = new Error("I ain't got it, so you can't get it. Lets leave it at that, cuz I ain't wit it.")
