@@ -13,12 +13,12 @@ export default {
 
   getByCode: async (request, response) => {
     _respond(response, await _api(() => 
-      ClassCodes.findByCode(request.params.id)))
+      ClassCodes.findByCode(request.params.code)))
   },
 
   update: async (request, response) => {
     const code = request.params.code
-    const {newValues} = request.body
+    const newValues = request.body
     _respond(response, await _api(() =>
       ClassCodes.update(code, newValues)))
   },

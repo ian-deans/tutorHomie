@@ -1,24 +1,17 @@
 import React from 'react'
-import {Modal} from 'react-bootstrap'
 
 export default props => {
 
   return (
-    <Modal 
-      show={props.show} 
-      onHide={props.closeFn}
-      bsSize='large'
-    >
-      <Modal.Header closeButton>
+    <div>
+      <div closeButton>
         <span>Tutor Homie</span>
-      </Modal.Header>
+      </div>
 
-      <Modal.Body>
+      <div>
         {props.viewComponent}
-      </Modal.Body>
+      </div>
 
-      <Modal.Footer>
-      </Modal.Footer>
-    </Modal>
+    </div>
   )
 }
