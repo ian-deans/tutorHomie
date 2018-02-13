@@ -7,9 +7,12 @@ export default {
       .returning('*'),
 
   findAll: () =>
-    db('students')
+    db
+      .select("students.*", "class_codes.value")
+      .from('students')
+      .leftJoin('class_codes', 'students.class_code', 'class_codes.code')
       .where({active: true})
-      .orderBy('name', 'asc'),
+      .orderBy('students.name', 'asc'),
 
   findOne: id =>
     db('students')
