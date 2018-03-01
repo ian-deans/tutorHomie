@@ -1,4 +1,10 @@
-let config = require('./knexfile.js')
-config = process.env.NODE_ENV ? config[process.env.NODE_ENV] : config['development']
+import mongoose from 'mongoose'
+mongoose.Promise = Promise
+mongoose.connect('mongodb://localhost/tutor_homie')
 
-export default require('knex')(config)
+const db = mongoose.connection
+
+db.on('error', error => console.log('Mongoose Error: ', error))
+db.once('open', () => console.log('Mongoose connected.'))
+
+export default db
