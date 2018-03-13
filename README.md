@@ -12,4 +12,5 @@ spreadsheet to keep track of my students and sessions while tutoring for Trilogy
 - Webpack
 - React
 - NextJS
-- Typescript
+- TypeScript
+- Jest
