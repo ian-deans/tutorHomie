@@ -5,8 +5,8 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import path from 'path'
 
-// import studentRouter from './routes/studentRouter'
-import classCodeRouter from './routes/classCodeRouter'
+import studentRouter from './routes/student'
+import classCodeRouter from './routes/classCode'
 // import sessionRouter from './routes/sessionRouter'
 // import sessionStatusRouter from './routes/sessionStatusRouter'
 
@@ -24,7 +24,7 @@ server.use(express.static(path.join(__dirname, '/public')))
 
 
 
-// server.use('/students', studentRouter)
+server.use('/students', studentRouter)
 server.use('/classcodes', classCodeRouter)
 // server.use('/sessions', sessionRouter)
 // server.use('/sessionstatus', sessionStatusRouter)

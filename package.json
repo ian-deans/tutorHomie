@@ -8,7 +8,8 @@
     "babel-node": "babel-node --presets=env",
     "test": "NODE_ENV=test ava",
     "dev": "nodemon --exec npm run babel-node -- ./src/server/server.js",
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "seedTest": "babel-node ./src/db/seeds/seedDB.js"
   },
   "author": "Ian Deans",
   "license": "MIT",
@@ -20,10 +21,10 @@
     "moment": "^2.19.4",
     "mongoose": "^5.0.7",
     "morgan": "^1.9.0",
+    "npm": "^5.7.1",
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "ava": "^0.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-helper-remap-async-to-generator": "^6.24.1",
@@ -43,23 +44,5 @@
     "react-toolbox": "^2.0.0-beta.12",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3"
-  },
-  "ava": {
-    "files": [
-      "**/tests/*.test.js",
-      "!**/not-this-file.js"
-    ],
-    "source": [
-      "**/*.{js,jsx}",
-      "!dist/**/*"
-    ],
-    "concurrency": 1,
-    "failFast": true,
-    "failWithoutAssertions": false,
-    "tap": true,
-    "powerAssert": false,
-    "require": [
-      "babel-register"
-    ]
   }
 }

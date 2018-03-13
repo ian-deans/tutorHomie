@@ -1,5 +1,5 @@
 import express from 'express'
-import controller from '../controllers/controller_ClassCode'
+import controller from '../controllers/classCode'
 
 export default express.Router()
   .post('/', controller.add)

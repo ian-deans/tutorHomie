@@ -23,9 +23,9 @@ export default {
     }
   },
 
-  getAll: (request, response) => {
+  getAll: async (request, response) => {
     _currentResponse = response
-    ClassCode.find()
+    ClassCode.find().sort({code: 'ascending'})
       .then(_successfulResponse)
       .catch(_dbError)
   },
