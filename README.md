@@ -1,16 +1,9 @@
 # Tutor Homie
-An application I use for maintaining my student roster and session schedule.
+## Version 2b
 
-A basic CRUD app with a few added features. I became tired of entering data into a
-spreadsheet to keep track of my students and sessions while tutoring for Trilogy. 
+Stripped down to maintaining only a student roster, with features for adding, 
+updating, and deleting students from roster.
 
-- Node.js
-- Express
-- MongoDB
-- Mongoose
-- Babel
-- Webpack
-- React
-- NextJS
-- TypeScript
-- Jest
+Also provides assistance with filling out the session survey by gathering data 
+and giving a string that can be parsed by the user script found in surveyAssist.js.
+
