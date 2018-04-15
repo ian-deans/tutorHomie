@@ -1,90 +1,49 @@
 import ClassCode from '../../db/models/ClassCode'
-
-let _currentResponse
+import {_api, _badRequestError, _respond} from './utils'
 
 export default {
-  add: (request, response) => {
-    _currentResponse = response
+  add: async (request, response) => {
     const {code, value} = request.body
+    if (!code || !value) _badRequestError(response);
 
-    if (code && value) {
-      const newClassCode = new ClassCode({
-        code: code,
-        value: value
+    _respond(response, await _api(() => {
+      const classCode = new ClassCode({code, value})
+      classCode.save((error, doc) => {
+        if (error) throw error;
+        return doc
       })
-      newClassCode.save((error, doc) => {
-        if (error) {
-          _dbError(error)
-        }
-        _successfulResponse(doc)
-      })
-    } else {
-      _badRequestError()
-    }
+    }))
   },
 
   getAll: async (request, response) => {
-    _currentResponse = response
-    ClassCode.find().sort({code: 'ascending'})
-      .then(_successfulResponse)
-      .catch(_dbError)
+    _respond(response, await _api(() => 
+      ClassCode.find().sort({code: 'ascending'})
+    ))
   },
 
-  getByCode: (request, response) => {
-    _currentResponse = response
-    ClassCode.findOne({code: request.params.code})
-      .then(_successfulResponse)
-      .catch(_dbError)
+  getByCode: async (request, response) => {
+    _respond(response, await _api(() => 
+      ClassCode.findOne({code: request.params.code})
+    ))
   },
 
-  update: (request, response) => {
-    _currentResponse = response
-    ClassCode.findOne({code: request.params.code})
-      .then( classCode => {
-        ClassCode.findByIdAndUpdate(
-          classCode._id,
-          request.body,
-          {new: true}
-        )
-          .then(_successfulResponse)
-          .catch(_dbError)
-      })
+  update: async (request, response) => {
+    const classCode = await ClassCode.findOne({code: request.params.code})
+    _respond(response, await _api(() => 
+      ClassCode.findByIdAndUpdate(
+        classCode._id,
+        request.body,
+        {new: true}
+      )
+    ))
   },
 
-  delete: (request, response) => {
-    _currentResponse = response
-    ClassCode
-      .findOne({
+  delete: async (request, response) => {
+    _respond(response, await _api(() => {
+      ClassCode.findOne({
         code: request.params.code
       })
       .remove()
-      .then(
-        _successfulResponse({
-          message: 'Code successfully deleted from database.'
-        })
-      )
-      .catch(_dbError)
-
+    }))
   }
-
 }
-
-const _successfulResponse = result =>
-  _currentResponse
-    .status(200)
-    .json(result) 
-
-const _dbError = error => 
-  _currentResponse
-    .status(500)
-    .json({
-      message: 'Database error.',
-      error: error,
-    })
-
-const _badRequestError = () =>
-  _currentResponse
-    .status(400)
-    .json({
-      message: 'Invalid request options received from client.'      
-    })

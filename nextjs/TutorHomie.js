@@ -6,14 +6,13 @@ import {buildTableData, types} from './utils'
 import actions from './utils/actions'
 import  * as components from './components'
 import API from './API'
+
 export default class TutorHomie extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       data: {
         students: [],
-        classcodes: [],
-        sessions: [], 
         isLoading: true,
       },
 
@@ -51,21 +50,21 @@ export default class TutorHomie extends React.Component {
   async getInitialState() {
     let newState = Object.assign({}, this.state)
     const students = await API.getAll(types.STUDENTS)
-    const classcodes = await API.getAll(types.CLASSCODES)
-    const sessions = await API.getAll(types.SESSIONS)
+    // const classcodes = await API.getAll(types.CLASSCODES)
+    // const sessions = await API.getAll(types.SESSIONS)
     newState.data = {
-      students, classcodes, sessions, isLoading: false
+      students, isLoading: false
     }
-    await this.setState(newState)
+    this.setState(newState)
   }
 
   async _refreshAppData() {
     await this.setState({loading: true})
     const students = await apiFetch(types.STUDENTS)
-    const classcodes = await apiFetch(types.CLASSCODES)
-    const sessions = await this._sessions()
+    // const classcodes = await apiFetch(types.CLASSCODES)
+    // const sessions = await this._sessions()
     const data = {
-      students, classcodes, sessions, isLoading: false
+      students, isLoading: false
     }
     await this.setState({data})
 
@@ -154,8 +153,6 @@ export default class TutorHomie extends React.Component {
             isLoading={isLoading}
           />
         </div>
-
-        
 
         <components.DetailsModal 
           show={modal.show} 

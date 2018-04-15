@@ -1,107 +1,54 @@
 import Student from '../../db/models/Student'
-
-let _currentResponse
+import {_api, _respond} from './utils'
 
 export default {
   add: async (request, response) => {
-    _currentResponse = response
-    const newStudent = new Student(request.body)
-    newStudent.save((error, doc) => {
-      if (error) {
-        _dbError(error)
-      }
-      _successfulResponse(doc)
-    })
+    _respond(response, await _api(() => {
+      const student = new Student(request.body)
+      student.save((error, doc) => {
+        if (error) throw error;
+        return doc
+      })
+    }))
   },
 
   getAll: async (request, response) => {
-    _currentResponse = response
-    try {
-      const students = await Student.find().sort({name: 'ascending'})
-      _successfulResponse(students)  
-    } catch (error) {
-      _dbError(error)
-    }
-    //.then(_successfulResponse)
-      //.catch(_dbError)
+    _respond(response, await _api(() => 
+      Student.find().sort({name: 'ascending'})
+    ))
   },
 
   findById: async (request, response) => {
-    _currentResponse = response
-    try {
-      const students = await Student.findById(request.params.id)
-      _successfulResponse(students)
-    } catch (error) {
-      _dbError(error)
-    }
+    _respond(response, await _api(()=>
+      Student.findById(request.params.id)
+    ))
   },
 
   findByName: async (request, response) => {
-    _currentResponse = response
-    try {
-      const student =  await Student.find({name: request.params.name})
-      _successfulResponse(student)
-    } catch(error) {
-      _dbError(error)
-    }
+    _respond(respond, await _api(() => 
+      Student.find({name: request.params.name})
+    ))
   },
 
   findByEmail: async (request, response) => {
-    _currentResponse = response
-    try {
-      const student =  await Student.find({email: request.params.email})
-      _successfulResponse(student)
-    } catch(error) {
-      _dbError(error)
-    }
+    _respond(response, await _api(() => 
+      Student.find({email: request.params.email})
+    ))
   },
 
   update: async (request, response) => {
-    _currentResponse = response
-    try {
-      const updatedStudent = await Student.findByIdAndUpdate(
+    _respond(response, await _api(() => 
+      Student.findByIdAndUpdate(
         request.params.id,
         request.body,
         {new: true}
       )
-      _successfulResponse(updatedStudent)
-    } catch(error) {
-      _dbError(error)
-    }
-
-    response.status(200).json(updatedStudent)
+    ))
   },
 
   delete: async (request, response) => {
-    try {
-      await Student
-        .findOne({
-          id: request.params.id
-        })
-      _successfulResponse({message: 'Student deleted.'})
-    } catch(error) {
-      _dbError(error)
-    }
+    _respond(response, await _api(() => 
+      Student.findOneAndRemove({id: request.params.id})
+    ))
   },
 }
-
-
-const _successfulResponse = result =>
-  _currentResponse
-    .status(200)
-    .json(result) 
-
-const _dbError = error => 
-  _currentResponse
-    .status(500)
-    .json({
-      message: 'Database error.',
-      error: error,
-    })
-
-const _badRequestError = () =>
-  _currentResponse
-    .status(400)
-    .json({
-      message: 'Invalid request options received from client.'      
-    })

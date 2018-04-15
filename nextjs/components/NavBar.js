@@ -14,16 +14,6 @@ export default props => {
             selectSubject={props.selectSubjectFn}
             subject="students"
           />
-          <TableSelectButton 
-            isLoading={props.isLoading}
-            selectSubject={props.selectSubjectFn}
-            subject="classcodes"
-          />
-          <TableSelectButton 
-            isLoading={props.isLoading}
-            selectSubject={props.selectSubjectFn}
-            subject="sessions"
-          />
         </ButtonGroup>
       }
 
