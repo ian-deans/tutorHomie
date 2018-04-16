@@ -1,6 +1,6 @@
 import React from 'react'
 import {Table, Panel} from 'react-bootstrap'
-import Row from '../Row'
+import Row from './Row'
 import TableWrapper from './TableWrapper'
 
 export default props => {
@@ -11,8 +11,10 @@ export default props => {
     _columns = props.fields.map((field, i) => 
       <th key={i}>{field}</th>)
     
-    _rows = props.values.map((value, i) => 
-      <Row key={i} data={value} popUpFn={props.popUpFn} />
+    _rows = props.values.map((value, i) => {
+      
+      return <Row key={i} data={value} popUpFn={props.popUpFn} />
+    }
     )
 
     title = props.subject

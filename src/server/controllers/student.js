@@ -14,7 +14,11 @@ export default {
 
   getAll: async (request, response) => {
     _respond(response, await _api(() => 
-      Student.find().sort({name: 'ascending'})
+      Student
+        .find()
+        .populate('classCode', 'code -_id')
+        .select('-__v -active')
+        .sort({name: 'ascending'})
     ))
   },
 

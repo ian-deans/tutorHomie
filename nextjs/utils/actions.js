@@ -1,14 +1,16 @@
 export default {
   //TODO: rename function to imply detailed view selection
   handleOpenModal: function(id) {
-    let newState = Object.assign({}, this.state)
-    newState.modal.show = true
-    newState.modal.detailView = true
-    newState.modal.addForm = false
-    newState.focused.item = newState.data[newState.focused.subject]
-      .filter(item => item.id === id)[0]
-
-    this.setState(newState)
+    console.log('ID::: ', id)
+    let state = Object.assign({}, this.state)
+    state.modal.show = true
+    state.data.students.map(student => {
+      if (student.name === id) {
+        state.modal.data = student
+        console.log(student)
+      }
+    })
+    this.setState(state)
   },
   handleCloseModal: function() {
     let newState = Object.assign({}, this.state)
@@ -32,35 +34,4 @@ export default {
     }
     this.setState(newState)
   }
-
-  /*
-    if addform is true
-      modal.addForm = false
-      modal.detailView = false
-      modal.show = false
-      turn addform off
-
-    if addform is false
-      addForm = true
-      detailView = false
-      show = true
-      turn addform on
-  */
-
-  // TODO: refactor for new state structure and to
-  //       not mutate state
-  
-  // toggleAddForm() {
-  //   let newState = Object.assign({}, this.state)
-    
-  //   if (newState.table.subject) {
-  //     let addForm = !this.state.addForm
-  //     this.setState({addForm})
-  //   }
-  // },
-  // hideAddForm() {
-  //   this.setState({addForm: false})
-  // },
-
-
 }

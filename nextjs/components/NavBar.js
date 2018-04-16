@@ -16,13 +16,6 @@ export default props => {
           />
         </ButtonGroup>
       }
-
-      <Button
-        bsStyle='success'
-        onClick={props.toggleAddFormFn}
-      >
-      +
-      </Button>
     </Panel>
   )
 

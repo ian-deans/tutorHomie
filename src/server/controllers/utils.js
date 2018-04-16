@@ -19,3 +19,10 @@ export const _respond = (response, result) => {
     .status(result.status)
     .json(result)
 }
+
+export const _badRequestError = response =>
+  response
+    .status(400)
+    .json({
+      message: 'Invalid request options received from client.'      
+    })
