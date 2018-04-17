@@ -1,11 +1,11 @@
 
 export default {
-  post: async (target, data) => {
-    const url = _fetchURL(target.type, null)
+  post: async (type, data) => {
+    const url = _fetchURL(type, null)
     const options = {
       method: 'POST',
       headers: _fetchHeaders(),
-      body: JSON.stringify(data)  // data is an array object: {fieldName: value}
+      body: JSON.stringify(data)
     }
     const response = await fetch(new Request(url, options))
     return _dataOrError(response)

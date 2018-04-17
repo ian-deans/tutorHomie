@@ -19,7 +19,8 @@ const StudentSchema = new mongoose.Schema({
   },
   handle: {
     type: String,
-    required: false
+    required: true,
+    default: 'none'
   },
   active: {
     type: Boolean,

@@ -10,7 +10,7 @@
     "dev": "nodemon --exec npm run babel-node -- ./src/server/server.js",
     "webpack": "webpack",
     "webpack:watch": "webpack --watch",
-    "seedTest": "babel-node ./src/db/seeds/seedDB.js"
+    "db:seed": "babel-node ./src/db/seeds/seedDB.js"
   },
   "author": "Ian Deans",
   "license": "MIT",

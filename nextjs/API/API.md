@@ -1,19 +1,16 @@
 ### __API.post__
-  - Takes a target and a data object as arguments.
+  - Takes a type string and a data object as arguments.
 
 `````javascript
-  const target = {
-      type: types.STUDENTS, 
-      id: 14
-    } 
+  const type = types.STUDENTS 
 
-  const data = [
-      {id: 14},
-      {name: 'Testy McTester'},
-      {email: 'test_dood@dood.com'}  
-    ] 
+  const data = {
+    name: 'Testy McTester',
+    email: 'test_dood@dood.com',
+    handle: 'testMcDood'
+  }
 
-  API.post(target, data)
+  API.post(type, data)
 `````
   
 target is an object containing two key value pairs, type and id.

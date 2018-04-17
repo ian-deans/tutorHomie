@@ -16,7 +16,7 @@ const TutorSchema = new mongoose.Schema({
   handle: {
     type: String,
     requred: true,
-    unique: true
+    unique: true,
   },
   students: [{
     type: mongoose.Schema.Types.ObjectId,

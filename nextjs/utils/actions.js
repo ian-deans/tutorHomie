@@ -1,13 +1,11 @@
 export default {
   //TODO: rename function to imply detailed view selection
   handleOpenModal: function(id) {
-    console.log('ID::: ', id)
     let state = Object.assign({}, this.state)
     state.modal.show = true
     state.data.students.map(student => {
       if (student.name === id) {
         state.modal.data = student
-        console.log(student)
       }
     })
     this.setState(state)

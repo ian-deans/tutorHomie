@@ -32,7 +32,6 @@ export default class TutorHomie extends React.Component {
   async getInitialState() {
     let newState = Object.assign({}, this.state)
     newState.data.students = await API.getAll(types.STUDENTS)
-    console.log(newState.data.students)
     newState.data.students.forEach(student =>{
       if (student.classCode) {
         student.classCode = Object.values(student.classCode)[0]
@@ -60,8 +59,6 @@ export default class TutorHomie extends React.Component {
 
   render() {
     const {table, modal, isLoading} = this.state
-    console.log(table)
-    console.log(this.state.data)
 
     return (
       <div style={{margin: "10px"}}>
