@@ -8,7 +8,7 @@ node_modules
 package-lock.json
 scratch
 src/db/databases/*.db
-src/db/seeds
+src/db/seeds/student_roster.js
 src/server/public/app_bundle.js
 yarn.lock
 yarn-error.log
